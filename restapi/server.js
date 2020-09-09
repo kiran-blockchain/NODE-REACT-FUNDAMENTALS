@@ -11,8 +11,8 @@ app.get(ROUTE_CONTSTANTS.GET_LOGIN,function (req,res){
 });
 
 app.get(ROUTE_CONTSTANTS.GET_REGISTER,function (req,res){
-    res.send("<h1>Register Page</h1>");
-});
+    res.sendFile(__dirname+'/pages/register.html')
+})
 
 app.get(ROUTE_CONTSTANTS.GET_PRODUCTS,function (req,res){
     res.send("<h1>Products Page</h1>");
