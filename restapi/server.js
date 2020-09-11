@@ -1,6 +1,38 @@
 const express = require('express');
-const { ROUTE_CONTSTANTS } = require('./helpers/route_constants');
+const bodyParser = require('body-parser');
 const app = express();
+const asyncRequest = require('async-request');
+const { ROUTE_CONTSTANTS } = require('./helpers/route_constants');
+const countryListUrl ='https://restcountries.eu/rest/v2/all';
+
+
+//Add body pareser.
+/* Body Parser will intercept the request and extract the data provided by the user
+attaches the data to request.body 
+*/
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
+app.get(ROUTE_CONTSTANTS.GET_COUNTRIES, function(req,res){
+    try{
+        const response = await asyncRequest('https://api.github.com/users/kiran-blockchain/repos?per_page=100&page=1',
+            
+        );
+        res.json(response);
+    }    
+    catch(err){
+        res.json(err);
+    }
+
+});
+
+app.post(ROUTE_CONTSTANTS.POST_REGISTER,function(req,res){
+    console.log(req.body);
+    res.send("Successfully Registered")
+})
+
+
 //route, callback function.
 app.get(ROUTE_CONTSTANTS.DEFAULT,function (req,res){
     res.send("<h1>Welcome to Pega");
@@ -13,6 +45,7 @@ app.get(ROUTE_CONTSTANTS.GET_LOGIN,function (req,res){
 app.get(ROUTE_CONTSTANTS.GET_REGISTER,function (req,res){
     res.sendFile(__dirname+'/pages/register.html')
 })
+
 
 app.get(ROUTE_CONTSTANTS.GET_PRODUCTS,function (req,res){
     const productsData =[
@@ -246,5 +279,12 @@ app.get(ROUTE_CONTSTANTS.GET_PRODUCTS,function (req,res){
 });
 app.get(ROUTE_CONTSTANTS.GET_FILE,function(req,res){
     res.sendFile(__dirname+"/files/demo.pdf");
-})
+});
+
 app.listen(3000);
+
+
+
+
+
+
