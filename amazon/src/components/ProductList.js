@@ -18,10 +18,18 @@ const ProductList = (props) => {
         imageUrl: "https://cdn.vox-cdn.com/thumbor/PDPaybexLzPoXsQAPeC1uvJoxWg=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19212737/akrales_190918_3645_0166.jpg"
     }
 
-    ]
+    ];
+    const update=(data)=>{
+        console.log(data);
+        props.updateCartInApp(data);
+
+    }
     return <div className="row">
         {products.map((item,index)=>{
-            return <Product productDetails={item}/>
+            return <Product 
+             productDetails={item}
+             handleClick={update}
+             />
         })}
     </div>
 }

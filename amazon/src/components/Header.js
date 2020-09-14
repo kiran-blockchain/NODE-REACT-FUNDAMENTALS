@@ -18,7 +18,7 @@ const Header = (props) => {
           <a className="nav-link" href="#">Link</a>
         </li>
         <li className="nav-item">
-          <Cart/>
+          <Cart cartCount={props.cartCount}/>
         </li>
        
       </ul>
